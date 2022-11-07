@@ -16,7 +16,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "minimist": "^1.2.0",
-    "search-index": "^1.0.1",
+    "search-index": "^3.2.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

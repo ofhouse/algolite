@@ -15,7 +15,7 @@ const createServer = (options) => {
     const { body, params: { indexName } } = req
     const { params: queryParams } = body
 
-    const db = getIndex(indexName, path)
+    const db = await getIndex(indexName, path)
 
     const { query, filters, facetFilters } = queryParams ? querystring.parse(queryParams) : body
 
