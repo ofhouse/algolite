@@ -52,7 +52,7 @@ const createServer = (options) => {
     const { body, params: { indexName } } = req
     const _id = v4()
 
-    const db = getIndex(indexName, path)
+    const db = await getIndex(indexName, path)
     await db.PUT([{
       _id,
       ...body
@@ -88,7 +88,7 @@ const createServer = (options) => {
       }
     }
 
-    const db = getIndex(indexName, path)
+    const db = await getIndex(indexName, path)
     if (puts.length) {
       await db.PUT(puts)
     }
@@ -106,7 +106,7 @@ const createServer = (options) => {
     const { body, params: { indexName } } = req
     const { objectID } = req.params
 
-    const db = getIndex(indexName, path)
+    const db = await getIndex(indexName, path)
     try {
       await db.DELETE([objectID])
     } catch (error) {
@@ -130,8 +130,8 @@ const createServer = (options) => {
   app.delete('/1/indexes/:indexName/:objectID', async (req, res) => {
     const { objectID, indexName } = req.params
 
-    const db = getIndex(indexName, path)
     try {
+      const db = await getIndex(indexName, path)
       await db.DELETE([objectID])
     } catch (error) {
       if (!error.notFound) {
@@ -152,7 +152,7 @@ const createServer = (options) => {
 
     const { facetFilters } = querystring.parse(queryParams)
 
-    const db = getIndex(indexName, path)
+    const db = await getIndex(indexName, path)
 
     const searchExp = []
     if (facetFilters) {
@@ -183,7 +183,7 @@ const createServer = (options) => {
       return res.status(400).end()
     }
 
-    const db = getIndex(indexName, path)
+    const db = await getIndex(indexName, path)
     const result = await db.INDEX.GET('')
     const ids = result.map(obj => obj._id)
     await db.INDEX.DELETE(ids)
