@@ -1,9 +1,8 @@
+const { randomUUID } = require('crypto')
 const express = require('express')
 const querystring = require('querystring')
 const parseAlgoliaSQL = require('./src/parseAlgoliaSQL')
 const { getIndex, existIndex } = require('./src/indexes')
-
-const { v4 } = require('uuid')
 
 const createServer = (options) => {
   const path = options.path || process.cwd()
@@ -50,7 +49,7 @@ const createServer = (options) => {
 
   app.post('/1/indexes/:indexName', async (req, res) => {
     const { body, params: { indexName } } = req
-    const _id = v4()
+    const _id = randomUUID()
 
     const db = await getIndex(indexName, path)
     await db.PUT([{

@@ -16,8 +16,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "minimist": "^1.2.0",
-    "search-index": "^3.2.0",
-    "uuid": "^3.3.2"
+    "search-index": "^3.2.0"
   },
   "devDependencies": {
     "eslint": "^5.13.0",
@@ -28,5 +27,8 @@
     "eslint-plugin-standard": "^4.0.0",
     "nodemon": "^1.18.9",
     "pegjs": "^0.10.0"
+  },
+  "engines": {
+    "node": ">=14.17"
   }
 }
